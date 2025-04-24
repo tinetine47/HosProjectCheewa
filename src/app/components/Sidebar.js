@@ -25,8 +25,8 @@ export default function Sidebar(){
                 <span className={styles.sidebarText}><Link href="/patients">รายชื่อผู้ป่วย</Link></span>
               </li>
               <li className={styles.sidebarItem}>
-                <span className={styles.sidebarIcon}>🕒</span>
-                <span className={styles.sidebarText}><Link href="/care_routine">กิจวัตรประจำวัน</Link></span>
+                <span className={styles.sidebarIcon}>💉</span>
+                <span className={styles.sidebarText}><Link href="/treatment">ข้อมูลการรักษา</Link></span>
               </li>
               <li className={styles.sidebarItem}>
                 <span className={styles.sidebarIcon}>📅</span>

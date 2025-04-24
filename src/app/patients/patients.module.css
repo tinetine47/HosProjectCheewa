@@ -125,5 +125,222 @@
     background-color: #0056b3;
   }
   
+  .adlTableWrapper {
+    margin-top: 16px;
+    background-color: #e0e0e0;
+    padding: 16px;
+    border-radius: 12px;
+  }
   
+  .adlTableWrapper .table {
+    background-color: white;
+    margin-top: 0;
+  }
+  
+  .descriptionCell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .tooltipWrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltipIcon {
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .tooltipText {
+    visibility: hidden;
+    width: 220px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    top: 120%;
+    left: 0;
+    white-space: pre-line;
+    font-size: 13px;
+  }
+  
+  .tooltipWrapper:hover .tooltipText {
+    visibility: visible;
+  }
+  
+  .resultRow {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+  
+  .adlButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  
+  .adlButtons button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .adlButtons button:first-child {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .adlButtons .saveButton {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .adlButtons .saveButton:hover {
+    background-color: #388e3c;
+  }
+  
+/* patients.module.css */
+
+/* ... CSS อื่นๆ ของคุณ ... */
+
+.floatingButtonContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.addButton {
+  background-color: #007bff; /* สีน้ำเงิน */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* สีดำกึ่งโปร่งใส */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* ให้ Modal อยู่เหนือทุกสิ่ง */
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%; /* ปรับขนาดตามต้องการ */
+  max-width: 600px; /* กำหนดขนาดสูงสุด */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
+.modalBody {
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalFooter button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.modalFooter .cancelButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.modalFooter .cancelButton:hover {
+  background-color: #d32f2f;
+}
+
+.modalFooter .saveButton {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.modalFooter .saveButton:hover {
+  background-color: #388E3C;
+}
   
