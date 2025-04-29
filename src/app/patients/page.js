@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './patients.module.css';
 import { FaEye, FaEdit, FaSearch, FaTimes } from 'react-icons/fa'; // เพิ่ม FaTimes สำหรับปุ่มปิด
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -58,87 +58,47 @@ export default function Patients() {
         {/* Patient Table */}
         <div className={styles.tableWrapper}>
           <table className={styles.table}>
+            {/* ***** START OF CHANGES in Patient Table ***** */}
+            {/* Removed extra whitespace within thead and tr */}
             <thead>
-              <tr>
-                <th>รหัสประจำตัว</th>
-                <th>ชื่อจริง-นามสกุล</th>
-                <th>อายุ</th>
-                <th>วันที่เข้ารับการรักษา</th>
-                <th>โรคประจำตัว</th>
-                <th>กิจวัตรประจำวัน</th>
-              </tr>
+              <tr><th>รหัสประจำตัว</th><th>ชื่อจริง-นามสกุล</th><th>อายุ</th><th>วันที่เข้ารับการรักษา</th><th>โรคประจำตัว</th><th>กิจวัตรประจำวัน</th></tr>
             </thead>
-            <tbody>
-              {[1, 2, 3].map((i, index) => (
-                <>
-                  <tr key={i}>
-                    <td>HN0000{i}</td>
-                    <td>นาย ภัทรดนัย เกียรตินิธิกุล</td>
-                    <td>80 ปี</td>
-                    <td>20 ตุลาคม 2560</td>
-                    <td>สมองเสื่อม</td>
-                    <td className={styles.actions}>
-                      <button onClick={() => toggleAdlDropdown(index)}>
-                        {activePatient === index ? <FaChevronUp /> : <FaChevronDown />}
-                      </button>
-                      <button><FaEye /></button>
-                      <button><FaEdit /></button>
-                    </td>
-                  </tr>
+            {/* Removed extra whitespace within tbody, between Fragments/trs, and within tr/td */}
+            <tbody>{[1, 2, 3].map((i, index) => (
+                // Use React.Fragment to group rows without adding an extra DOM element
+                // Ensure no leading/trailing whitespace around the fragment or its children (trs)
+                <React.Fragment key={i}>
+                  <tr><td>HN0000{i}</td><td>นาย ภัทรดนัย เกียรตินิธิกุล</td><td>80 ปี</td><td>20 ตุลาคม 2560</td><td>สมองเสื่อม</td><td className={styles.actions}><button onClick={() => toggleAdlDropdown(index)}>{activePatient === index ? <FaChevronUp /> : <FaChevronDown />}</button><button className={styles.viewButton}><FaEye /></button><button><FaEdit /></button></td></tr>
                   {activePatient === index && (
-                    <tr>
-                      <td colSpan={6}>
-                        {/* ADL Table */}
-                        <div className={styles.adlTableWrapper}>
-                          <table className={styles.table}>
-                            <thead>
-                              <tr>
-                                <th>หัวข้อที่</th>
-                                <th>การประเมินกิจวัตรประจำวัน</th>
-                                <th colSpan="4">คะแนน</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {adlItems.map((item, idx) => (
-                                <tr key={item.id}>
-                                  <td>{idx + 1}</td>
-                                  <td className={styles.descriptionCell}>
-                                    {item.name}
-                                    <div className={styles.tooltipWrapper}>
-                                      <span className={styles.tooltipIcon}>ⓘ</span>
-                                      <div className={styles.tooltipText}>{item.tooltip}</div>
-                                    </div>
-                                  </td>
-                                  {[0, 1, 2, 3].map(score => (
-                                    <td key={score}>
-                                      <input
-                                        type="radio"
-                                        name={`adl-${index}-${item.id}`}
-                                        value={score}
-                                        checked={adlScores[item.id] === score}
-                                        onChange={() => handleScoreChange(item.id, score)}
-                                      />
-                                    </td>
-                                  ))}
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                          <div className={styles.resultRow}>
-                            <span>คะแนนรวม : <strong>{totalScore}</strong></span>
-                            <span>แปลผล :</span>
-                          </div>
-                          <div className={styles.adlButtons}>
-                            <button>ยกเลิก</button>
-                            <button className={styles.saveButton}>บันทึกข้อมูล</button>
-                          </div>
+                    <tr><td colSpan={6}>
+                      {/* ADL Table */}
+                      <div className={styles.adlTableWrapper}>
+                        <table className={styles.table}>
+                          {/* ***** START OF CHANGES in ADL Table ***** */}
+                          {/* Removed extra whitespace within thead and tr */}
+                          <thead>
+                            <tr><th>หัวข้อที่</th><th>การประเมินกิจวัตรประจำวัน</th><th colSpan="4">คะแนน</th></tr>
+                          </thead>
+                          {/* Removed extra whitespace within tbody, between trs, and within tr/td */}
+                          <tbody>{adlItems.map((item) => (
+                              <tr key={item.id}><td>{adlItems.indexOf(item) + 1}</td><td className={styles.descriptionCell}>{item.name}<div className={styles.tooltipWrapper}><span className={styles.tooltipIcon}>ⓘ</span><div className={styles.tooltipText}>{item.tooltip}</div></div></td>{[0, 1, 2, 3].map(score => (<td key={score}><input type="radio" name={`adl-${index}-${item.id}`} value={score} checked={adlScores[item.id] === score} onChange={() => handleScoreChange(item.id, score)} /></td>))}</tr>
+                          ))}</tbody>
+                          {/* ***** END OF CHANGES in ADL Table ***** */}
+                        </table>
+                        <div className={styles.resultRow}>
+                          <span>คะแนนรวม : <strong>{totalScore}</strong></span>
+                          <span>แปลผล :</span>
                         </div>
-                      </td>
-                    </tr>
+                        <div className={styles.adlButtons}>
+                          <button>ยกเลิก</button>
+                          <button className={styles.saveButton}>บันทึกข้อมูล</button>
+                        </div>
+                      </div>
+                    </td></tr>
                   )}
-                </>
-              ))}
-            </tbody>
+                </React.Fragment>
+            ))}</tbody>
+             {/* ***** END OF CHANGES in Patient Table ***** */}
           </table>
         </div>
       </div>
@@ -159,6 +119,7 @@ export default function Patients() {
               </button>
             </div>
             <div className={styles.modalBody}>
+              {/* ... Modal form groups ... */}
               <div className={styles.formGroup}>
                 <label htmlFor="name">ชื่อ:</label>
                 <input type="text" id="name" placeholder="ระบุชื่อ" />
@@ -183,7 +144,6 @@ export default function Patients() {
                 <label htmlFor="congenitalDisease">โรคประจำตัว:</label>
                 <input type="text" id="congenitalDisease" placeholder="ระบุโรคประจำตัว" />
               </div>
-              {/* เพิ่มฟิลด์อื่นๆ ตามที่คุณต้องการ */}
               <div className={styles.formGroup}>
                 <label htmlFor="admissionDate">วันที่เข้ารับการรักษา:</label>
                 <input type="date" id="admissionDate" />

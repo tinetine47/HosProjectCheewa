@@ -1,0 +1,401 @@
+/* treatment.module.css */
+
+.container {
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  position: relative;
+  background-color: #00695c;
+  padding: 10px 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 50px;
+  display: flex; /* ใช้ flexbox เพื่อจัดวาง */
+  align-items: center; /* จัดให้กึ่งกลางแนวตั้ง */
+}
+
+.centerTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.headerTitle {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.searchBox {
+  position: absolute;
+  right: 16px;
+}
+
+.searchBox input {
+  padding: 6px 30px 6px 10px;
+  border-radius: 4px;
+  border: none;
+  width: 180px;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.table th {
+  background-color: #eeeeee;
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #999;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center; /* จัดปุ่มให้อยู่ตรงกลาง */
+}
+
+.actions button {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 1rem; /* เพิ่มขนาด icon ให้อ่านง่ายขึ้น */
+}
+
+.actions button:hover {
+  background-color: #ddd;
+}
+
+.floatingButtonContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+.addButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+}
+
+/* เพิ่ม CSS สำหรับปุ่ม View และ Delete โดยเฉพาะ */
+.actions .viewButton {
+  color: #007bff;
+  font-size: 1rem;
+}
+
+.actions .deleteButton {
+  color: #dc3545;
+  font-size: 1rem;
+}
+
+/* =========================================== */
+/* =========== MODAL STYLES START ============ */
+/* =========================================== */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* ทำให้เข้มขึ้นเล็กน้อย */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* ให้ Modal อยู่เหนือทุกสิ่ง */
+}
+
+.modalContent {
+  background-color: white;
+  padding: 25px; /* เพิ่ม padding */
+  border-radius: 10px; /* ปรับมุม */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* เพิ่มเงา */
+
+  /* --- ปรับความกว้าง modal --- */
+  width: 85%;        /* กว้างขึ้น */
+  max-width: 1100px;   /* กำหนดความกว้างสูงสุดที่มากขึ้น */
+
+  /* --- จัดการความสูงและ layout ภายใน --- */
+  max-height: 90vh;   /* ความสูงสูงสุดไม่เกิน 90% ของ viewport */
+  display: flex;        /* ใช้ Flexbox */
+  flex-direction: column; /* เรียง header, body, footer แนวตั้ง */
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0; /* สีขอบจางลง */
+  padding-bottom: 15px;           /* เพิ่ม padding */
+  margin-bottom: 20px;            /* เพิ่มระยะห่าง */
+}
+
+.modalTitle {
+  font-size: 1.6rem; /* ใหญ่ขึ้นเล็กน้อย */
+  font-weight: 600;  /* น้ำหนักตัวอักษร */
+  color: #333;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 1.8rem; /* ใหญ่ขึ้น */
+  cursor: pointer;
+  line-height: 1; /* ป้องกันการเยื้อง */
+  padding: 0 5px; /* เพิ่มพื้นที่คลิก */
+}
+
+.closeButton:hover {
+  color: #000; /* เข้มขึ้นเมื่อ hover */
+}
+
+.modalBody {
+  overflow-y: auto; /* มี scrollbar ถ้าเนื้อหาเกิน */
+  flex-grow: 1;     /* ให้ body ขยายเต็มพื้นที่ */
+  padding: 5px 10px; /* ปรับ padding ด้านใน body */
+  margin-bottom: 0; /* เอา margin-bottom ออก เพราะ footer มี margin-top */
+}
+
+/* ลบ .modalSubTitle ออก (ถ้าไม่ได้ใช้แล้ว) หรือปรับแก้ตามต้องการ */
+/*
+.modalSubTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+*/
+
+.formGroup {
+  margin-bottom: 18px; /* ปรับระยะห่าง */
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 6px; /* เพิ่มระยะห่าง label */
+  font-weight: bold;
+  font-size: 0.9em;   /* ปรับขนาด font */
+  color: #444;       /* สีเข้มขึ้น */
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup input[type="date"],
+.formGroup textarea {
+  width: 100%;
+  padding: 10px 12px; /* ปรับ padding input */
+  border: 1px solid #ccc;
+  border-radius: 5px;  /* ปรับมุม input */
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out; /* เพิ่ม transition */
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="number"]:focus,
+.formGroup input[type="date"]:focus,
+.formGroup textarea:focus {
+  border-color: #007bff; /* เปลี่ยนสีขอบเมื่อ focus */
+  outline: none; /* เอา outline เริ่มต้นออก */
+}
+
+
+.formGroup input[type="text"]:disabled {
+  background-color: #f2f2f2; /* สีพื้นหลัง disabled */
+  color: #888;             /* สีตัวอักษร disabled */
+  cursor: not-allowed;
+}
+
+.formGroup textarea {
+    resize: vertical; /* อนุญาตให้ปรับขนาด textarea แนวตั้ง */
+    min-height: 80px; /* กำหนดความสูงขั้นต่ำ */
+ }
+
+/* --- Styles สำหรับ Layout Grid ภายใน Modal --- */
+
+.hnInputGroup { /* จัด HN กับปุ่มตรวจสอบ */
+  display: flex;
+  align-items: flex-end; /* จัดให้ input กับ button อยู่ล่างสุดแนวเดียวกัน */
+  gap: 10px;
+  margin-bottom: 25px; /* ระยะห่างพิเศษ */
+}
+.hnInputGroup label {
+  margin-bottom: 0; /* ไม่ต้องมี margin ล่าง */
+  white-space: nowrap; /* ไม่ให้ label ตัดคำ */
+}
+ .hnInputGroup input[type="text"] {
+  flex-grow: 1; /* ให้ input ขยายเต็มพื้นที่ */
+ }
+ .checkButton { /* ใช้ class นี้ แทน .formGroup .checkButton */
+  background-color: #17a2b8; /* สีฟ้าอมเขียว */
+  color: white;
+  padding: 10px 18px; /* ปรับ padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem; /* ปรับขนาด */
+  font-weight: bold;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+.checkButton:hover {
+  background-color: #138496; /* สีเข้มขึ้น */
+}
+
+
+.infoGrid { /* Grid สำหรับ ชื่อ, นามสกุล, etc. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* ปรับ minmax */
+  gap: 18px; /* ปรับระยะห่าง */
+  margin-bottom: 25px;
+}
+/* ใน infoGrid ไม่ต้องมี margin-bottom ใน formGroup */
+.infoGrid .formGroup {
+    margin-bottom: 0;
+}
+
+
+.appointmentDetailsGrid { /* Grid สำหรับ ปฏิทิน และ รายละเอียด */
+  display: grid;
+  grid-template-columns: minmax(300px, 350px) 1fr; /* กำหนดขนาดคอลัมน์ปฏิทินให้ชัดเจนขึ้น */
+  gap: 30px; /* เพิ่มระยะห่าง */
+  margin-bottom: 25px;
+}
+
+.calendarSection {
+   display: flex;
+   flex-direction: column;
+}
+.calendarSection label {
+    margin-bottom: 6px; /* ระยะห่าง label ปฏิทิน */
+}
+/* เพิ่ม CSS ถ้าใช้ react-datepicker */
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    width: 100% !important; /* ทำให้ input ของ datepicker กว้างเต็ม */
+    display: block !important;
+    padding: 10px 12px !important; /* ใช้ padding เดียวกับ input อื่น */
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+}
+
+
+.detailsSection {
+   display: flex;
+   flex-direction: column;
+   gap: 18px; /* ระยะห่างระหว่าง form group ในส่วนนี้ */
+}
+.detailsSection .formGroup {
+  margin-bottom: 0; /* ไม่ต้องมี margin ล่าง */
+}
+
+
+.timeInputs { /* จัด input เวลา */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* ปรับระยะห่าง */
+}
+.timeInputs input[type="number"] {
+  width: 65px; /* ปรับความกว้าง input เวลา */
+  text-align: center;
+}
+.timeInputs span { /* สำหรับคำว่า "ถึง" */
+    font-weight: bold;
+    color: #555;
+}
+
+/* --- Footer Styles --- */
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px; /* เพิ่มระยะห่างปุ่ม */
+  border-top: 1px solid #e0e0e0; /* สีขอบจางลง */
+  padding-top: 20px;             /* เพิ่ม padding */
+  margin-top: 20px;             /* เพิ่มระยะห่าง */
+}
+
+/* สไตล์ปุ่มพื้นฐานใน Footer */
+.modalFooter button {
+  padding: 10px 25px; /* ปรับ padding ปุ่ม */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* ปุ่มล้างค่า (เปลี่ยนจาก .cancelButton) */
+.clearButton {
+  background-color: #f8f9fa; /* สีเทาอ่อน */
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.clearButton:hover {
+  background-color: #e2e6ea;
+  border-color: #ccc;
+}
+
+/* ปุ่มบันทึก */
+.saveButton { /* ใช้ class นี้ แทน .modalFooter .saveButton */
+  background-color: #28a745; /* สีเขียว */
+  color: white;
+}
+
+.saveButton:hover {
+  background-color: #218838; /* สีเขียวเข้มขึ้น */
+}
+
+
+/* =========================================== */
+/* ============ MODAL STYLES END ============= */
+/* =========================================== */

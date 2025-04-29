@@ -1,224 +1,259 @@
-.container {
-    margin: 20px;
-    background-color: #f5f5f5;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header {
-    position: relative;
-    background-color: #00695c;
-    padding: 10px 16px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    height: 50px;
-  }
-  
-  .centerTitle {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+/* patients.module.css */
 
-  .headerTitle {
+.container {
+  margin: 20px;
+  background-color: #f5f5f5;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  position: relative; /* ใช้ position relative เพื่อให้ absolute children อ้างอิงได้ */
+  background-color: #00695c;
+  padding: 10px 16px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 50px;
+  /* ไม่ต้องใช้ flex/align-items ถ้าใช้ absolute positioning ภายใน */
+}
+
+.centerTitle {
+  position: absolute;
+  left: 50%;
+  top: 50%; /* เพิ่ม top */
+  transform: translate(-50%, -50%); /* แก้ไข transform ให้ถูกต้อง */
+  /* ไม่ต้องมี transform: translateX(-50%); ซ้ำ */
+}
+
+.headerTitle {
   color: #fff;
   font-size: 18px;
   font-weight: bold;
   margin: 0;
+  white-space: nowrap; /* ป้องกันการตัดคำ */
 }
-  
+
 .searchBox {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .searchBox input {
-    padding: 6px 30px 6px 10px;
-    border-radius: 4px;
-    border: none;
-    width: 180px;
-  }
-  
-  .searchIcon {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-  }
-  
-  .tableWrapper {
-    overflow-x: auto;
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    background-color: white;
-  }
-  
-  .table th {
-    background-color: #eeeeee;
-    text-align: left;
-    padding: 12px;
-    font-weight: bold;
-  }
-  
-  .table th,
-    .table td {
-  padding: 12px;
-  border: 1px solid #999;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-  
-  .actions {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  
-  .actions select {
-    padding: 4px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-  }
-  
-  .actions button {
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 6px;
-    padding: 6px;
-    cursor: pointer;
-  }
-  
-  .actions button:hover {
-    background-color: #ddd;
-  }
+.searchBox input {
+  padding: 6px 30px 6px 10px;
+  border-radius: 4px;
+  border: none;
+  width: 180px;
+}
 
-  .floatingButtonContainer {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 100;
-  }
-  
-  .addButton {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s;
-  }
-  
-  .addButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .adlTableWrapper {
-    margin-top: 16px;
-    background-color: #e0e0e0;
-    padding: 16px;
-    border-radius: 12px;
-  }
-  
-  .adlTableWrapper .table {
-    background-color: white;
-    margin-top: 0;
-  }
-  
-  .descriptionCell {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .tooltipWrapper {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .tooltipIcon {
-    font-size: 14px;
-    color: #555;
-    cursor: pointer;
-  }
-  
-  .tooltipText {
-    visibility: hidden;
-    width: 220px;
-    background-color: #333;
-    color: #fff;
-    text-align: left;
-    border-radius: 6px;
-    padding: 8px;
+.searchIcon {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 10px; /* ย้าย margin-top มาที่ wrapper */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  /* margin-top: 10px; เอาออกไปแล้ว */
+  background-color: white;
+}
+
+.table th {
+  background-color: #eeeeee;
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border: 1px solid #ccc; /* ปรับสีเส้นขอบ */
+}
+
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center; /* จัดปุ่ม/select ให้อยู่กลาง */
+}
+
+.actions select {
+  padding: 4px 8px; /* ปรับ padding */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.actions button {
+  background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 1.1rem; /* ปรับขนาด icon */
+  color: #555; /* สี icon เริ่มต้น */
+  line-height: 1; /* ป้องกันการเหลื่อม */
+}
+
+.actions button:hover {
+  background-color: #eee; /* เปลี่ยนพื้นหลังเมื่อ hover */
+  color: #000;
+}
+
+/* ปุ่มดูรายละเอียด (Eye icon) */
+.actions .viewButton {
+  color: #007bff; /* สีน้ำเงิน */
+}
+.actions .viewButton:hover {
+  color: #0056b3;
+}
+
+/* ปุ่มแก้ไข (Edit icon) */
+/* .actions .editButton { ... เพิ่มสไตล์ถ้าต้องการ ... } */
+
+
+.adlTableWrapper {
+  margin-top: 16px;
+  background-color: #f0f0f0; /* ปรับสีพื้นหลัง ADL */
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.adlTableWrapper .table {
+  background-color: white;
+  margin-top: 0;
+}
+.adlTableWrapper .table th,
+.adlTableWrapper .table td {
+    border-color: #ddd; /* สีเส้นขอบในตาราง ADL */
+}
+
+
+.descriptionCell {
+  /* position: relative; ไม่จำเป็นแล้วถ้าใช้ flex */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltipWrapper {
+  position: relative;
+  display: inline-block;
+  line-height: 1; /* ช่วยจัดตำแหน่ง icon */
+}
+
+.tooltipIcon {
+  font-size: 14px;
+  color: #555;
+  cursor: help; /* เปลี่ยน cursor */
+  border: 1px solid #ccc; /* ใส่ขอบให้ icon */
+  border-radius: 50%;    /* ทำให้เป็นวงกลม */
+  width: 18px;           /* กำหนดขนาด */
+  height: 18px;
+  display: inline-flex;  /* ใช้ flex จัดกลาง */
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltipText {
+  visibility: hidden;
+  opacity: 0; /* เพิ่ม opacity สำหรับ transition */
+  width: 240px; /* กว้างขึ้นเล็กน้อย */
+  background-color: rgba(51, 51, 51, 0.95); /* สีเข้มขึ้น + โปร่งใสนิดหน่อย */
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px; /* เพิ่ม padding */
+  position: absolute;
+  z-index: 10; /* ให้ tooltip อยู่เหนือกว่า */
+  bottom: 125%; /* ตำแหน่งเหนือ icon */
+  left: 50%;
+  transform: translateX(-50%); /* จัดกึ่งกลาง */
+  white-space: pre-line;
+  font-size: 13px;
+  transition: opacity 0.3s; /* เพิ่ม transition */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* เพิ่มเงา */
+}
+.tooltipText::after { /* สร้างสามเหลี่ยมชี้ลง */
+    content: "";
     position: absolute;
-    z-index: 1;
-    top: 120%;
-    left: 0;
-    white-space: pre-line;
-    font-size: 13px;
-  }
-  
-  .tooltipWrapper:hover .tooltipText {
-    visibility: visible;
-  }
-  
-  .resultRow {
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-  }
-  
-  .adlButtons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  
-  .adlButtons button {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .adlButtons button:first-child {
-    background-color: #e0e0e0;
-    color: #333;
-  }
-  
-  .adlButtons .saveButton {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .adlButtons .saveButton:hover {
-    background-color: #388e3c;
-  }
-  
-/* patients.module.css */
+    top: 100%; /* ชี้ลงจากด้านล่างของ tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+}
 
-/* ... CSS อื่นๆ ของคุณ ... */
 
+.tooltipWrapper:hover .tooltipText {
+  visibility: visible;
+  opacity: 1; /* ทำให้แสดงผล */
+}
+
+.resultRow {
+  margin-top: 16px; /* เพิ่มระยะห่าง */
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 10px; /* เพิ่ม padding */
+  background-color: #e9e9e9; /* ใส่พื้นหลัง */
+  border-radius: 6px;
+}
+
+.adlButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.adlButtons button {
+  padding: 10px 20px; /* ปรับ padding */
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* ปุ่ม Cancel/ยกเลิก ใน ADL */
+.adlButtons button:first-child {
+  background-color: #e0e0e0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+.adlButtons button:first-child:hover {
+  background-color: #d1d1d1;
+}
+
+/* ปุ่ม Save ใน ADL */
+.adlButtons .saveButton {
+  background-color: #4caf50; /* สีเขียว */
+  color: white;
+}
+
+.adlButtons .saveButton:hover {
+  background-color: #388e3c; /* สีเขียวเข้ม */
+}
+
+/* --- Floating Add Button (รวมสไตล์) --- */
 .floatingButtonContainer {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px; /* ปรับตำแหน่ง */
+  right: 24px;
   z-index: 100;
 }
 
@@ -226,16 +261,23 @@
   background-color: #007bff; /* สีน้ำเงิน */
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 6px; /* ปรับมุม */
+  padding: 12px 24px; /* ปรับ padding */
   cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1rem; /* ปรับขนาด font */
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); /* ปรับเงา */
+  transition: background-color 0.3s;
 }
 
 .addButton:hover {
   background-color: #0056b3;
 }
+
+
+/* =========================================== */
+/* === MODAL STYLES (รวมและแก้ไข) START ====== */
+/* =========================================== */
 
 .modalOverlay {
   position: fixed;
@@ -243,7 +285,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* สีดำกึ่งโปร่งใส */
+  background-color: rgba(0, 0, 0, 0.6); /* สีดำกึ่งโปร่งใส */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -252,25 +294,32 @@
 
 .modalContent {
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 80%; /* ปรับขนาดตามต้องการ */
-  max-width: 600px; /* กำหนดขนาดสูงสุด */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 25px; /* เพิ่ม padding */
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+
+  /* --- ปรับความกว้าง modal --- */
+  width: 80%;        /* กว้างขึ้น */
+  max-width: 950px;   /* กำหนดความกว้างสูงสุด (อาจน้อยกว่า modal ก่อนหน้า) */
+
+  /* --- จัดการความสูงและ layout ภายใน --- */
+  max-height: 90vh;   /* ความสูงสูงสุดไม่เกิน 90% ของ viewport */
+  display: flex;        /* ใช้ Flexbox */
+  flex-direction: column; /* เรียง header, body, footer แนวตั้ง */
 }
 
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .modalTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #333;
 }
 
@@ -278,69 +327,134 @@
   background: none;
   border: none;
   color: #aaa;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
+  line-height: 1;
+  padding: 0 5px;
 }
 
 .closeButton:hover {
-  color: #333;
+  color: #000;
 }
 
 .modalBody {
-  margin-bottom: 20px;
+  overflow-y: auto; /* มี scrollbar ถ้าเนื้อหาเกิน */
+  flex-grow: 1;     /* ให้ body ขยายเต็มพื้นที่ */
+  padding: 5px 10px; /* ปรับ padding ด้านใน body */
+  margin-bottom: 0;
 }
 
 .formGroup {
-  margin-bottom: 15px;
+  margin-bottom: 18px; /* ปรับระยะห่าง */
+  display: flex;
+  flex-direction: column;
 }
 
 .formGroup label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-weight: bold;
-  color: #555;
+  font-size: 0.9em;
+  color: #444;
 }
 
 .formGroup input[type="text"],
 .formGroup input[type="number"],
 .formGroup input[type="date"] {
   width: 100%;
-  padding: 8px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  border-radius: 5px;
+  box-sizing: border-box; /* สำคัญมาก */
   font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="number"]:focus,
+.formGroup input[type="date"]:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
+
+/* --- Footer Styles --- */
 .modalFooter {
   display: flex;
   justify-content: flex-end;
+  gap: 12px; /* ระยะห่างปุ่ม */
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+  margin-top: 20px;
 }
 
+/* สไตล์ปุ่มพื้นฐานใน Footer */
 .modalFooter button {
-  padding: 10px 15px;
+  padding: 10px 25px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  margin-left: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
+/* ปุ่ม Cancel (ใช้สีแดงตามโค้ดเดิม) */
 .modalFooter .cancelButton {
-  background-color: #f44336;
+  background-color: #dc3545; /* สีแดง */
   color: white;
+  border: 1px solid #dc3545;
 }
 
 .modalFooter .cancelButton:hover {
-  background-color: #d32f2f;
+  background-color: #c82333; /* สีแดงเข้ม */
+  border-color: #bd2130;
 }
 
+/* ปุ่ม Save (ใช้สีเขียวตามโค้ดเดิม) */
 .modalFooter .saveButton {
-  background-color: #4CAF50;
+  background-color: #28a745; /* สีเขียว */
   color: white;
 }
 
 .modalFooter .saveButton:hover {
-  background-color: #388E3C;
+  background-color: #218838; /* สีเขียวเข้ม */
 }
-  
+
+/* --- (Optional) Grid Layout Styles for Modal Body --- */
+/* --- เพิ่มส่วนนี้ถ้าต้องการใช้ Grid Layout ใน Modal นี้ --- */
+/*
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+  margin-bottom: 25px;
+}
+.infoGrid .formGroup {
+    margin-bottom: 0;
+}
+
+.appointmentDetailsGrid {
+  display: grid;
+  grid-template-columns: minmax(300px, 350px) 1fr;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+.appointmentDetailsGrid .formGroup {
+    margin-bottom: 0;
+}
+
+.calendarSection {
+   display: flex;
+   flex-direction: column;
+}
+
+.detailsSection {
+   display: flex;
+   flex-direction: column;
+   gap: 18px;
+}
+*/
+
+/* =========================================== */
+/* ========= MODAL STYLES (END) ============== */
+/* =========================================== */
