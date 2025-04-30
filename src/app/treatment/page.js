@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './treatment.module.css';
-import { FaEye, FaTrashAlt, FaTimes, FaSearch } from 'react-icons/fa';
+import { FaEye, FaTrashAlt, FaTimes, FaSearch, FaEdit} from 'react-icons/fa';
 
 // --- Sample Data (Keep or replace with actual data fetching) ---
 const treatmentData = [
@@ -115,7 +115,7 @@ export default function Treatment() {
                 <th>ชื่อจริง-นามสกุล</th>
                 <th>วันที่เข้ารับการรักษา</th>
                 <th>รูปแบบการรักษา</th>
-                <th></th> {/* Actions */}
+                <td></td> {/* Actions */}
               </tr>
             </thead>
             <tbody>
@@ -127,6 +127,7 @@ export default function Treatment() {
                   <td>{treatment.treatmentType}</td>
                   <td className={styles.actions}>
                     <button className={styles.viewButton} title="ดูรายละเอียด"><FaEye /></button>
+                    <button className={styles.editButton} title="แก้ไขข้อมูล"><FaEdit /></button>
                     <button className={styles.deleteButton} title="ลบข้อมูล"><FaTrashAlt /></button>
                   </td>
                 </tr>

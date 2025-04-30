@@ -1,0 +1,453 @@
+/* death.module.css */
+/* (Renamed from treatment.module.css for consistency) */
+
+/* General Page Styles (Container, Header, Table etc.) */
+/* These styles remain largely the same unless the overall page needs changes */
+.container {
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    position: relative;
+    background-color: #00695c; /* Or the specific green from the app's theme */
+    padding: 10px 16px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .centerTitle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .headerTitle {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .searchBox {
+    position: absolute;
+    right: 16px;
+  }
+  
+  .searchBox input {
+    padding: 6px 30px 6px 10px;
+    border-radius: 4px;
+    border: none;
+    width: 180px;
+  }
+  
+  .searchIcon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+  }
+  
+  .tableWrapper {
+    overflow-x: auto;
+    margin-top: 10px; /* Add some space below header */
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  
+  .table th {
+    background-color: #eeeeee;
+    text-align: left;
+    padding: 12px;
+    font-weight: bold;
+    border: 1px solid #ccc; /* Slightly lighter border */
+  }
+  
+  .table td {
+    padding: 12px;
+    border: 1px solid #ddd; /* Slightly lighter border */
+    vertical-align: middle; /* Align content vertically */
+  }
+  
+  .actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center; /* Center buttons in the cell */
+  }
+  
+  .actions button {
+    background-color: transparent; /* Make background transparent */
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+    cursor: pointer;
+    font-size: 1.1rem; /* Slightly larger icons */
+    color: #555; /* Default icon color */
+    line-height: 1; /* Prevent extra space */
+    transition: color 0.2s;
+  }
+  
+  .actions button:hover {
+    color: #000; /* Darken icon on hover */
+  }
+  
+  /* Specific button colors (using color, not background) */
+  .actions .viewButton {
+    color: #007bff; /* Blue */
+  }
+  .actions .viewButton:hover {
+    color: #0056b3;
+  }
+  
+  .actions .editButton {
+    color: #000000; /* Yellow/Orange */
+  }
+  .actions .editButton:hover {
+    color: #d39e00;
+  }
+  
+  .actions .deleteButton {
+    color: #dc3545; /* Red */
+  }
+  .actions .deleteButton:hover {
+    color: #c82333;
+  }
+  
+  .floatingButtonContainer {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+  }
+  
+  .addButton {
+    /* Using the green from the UI's save button */
+    background-color: #28a745; /* Match save button green */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+  }
+  
+  .addButton:hover {
+    background-color: #218838; /* Darker green */
+  }
+  
+  
+  /* =========================================== */
+  /* =========== MODAL STYLES START ============ */
+  /* =========================================== */
+  
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background-color: white;
+    padding: 20px 25px; /* Adjusted padding */
+    border-radius: 8px;  /* Slightly less rounded */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;       /* Adjust width as needed */
+    max-width: 900px; /* Adjust max-width based on content */
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content spilling before calculation */
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+  }
+  
+  .modalTitle {
+    font-size: 1.4rem; /* Adjusted size */
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    color: #888; /* Lighter close icon */
+    font-size: 1.7rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+  }
+  
+  .closeButton:hover {
+    color: #000;
+  }
+  
+  .modalBody {
+    overflow-y: auto; /* Enable scrolling for body content */
+    flex-grow: 1;     /* Allow body to take available space */
+    padding: 5px 10px; /* Padding inside the scrollable area */
+    margin: 0;        /* Remove margin */
+  }
+  
+  .formGroup {
+    margin-bottom: 16px; /* Consistent spacing */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold; /* Keep labels bold */
+    font-size: 0.9rem; /* Standard label size */
+    color: #444;
+  }
+  
+  /* Input field styling (matches UI more closely) */
+  .formGroup input[type="text"],
+  .formGroup input[type="number"],
+  .formGroup input[type="date"],
+  .formGroup textarea {
+    width: 100%;
+    padding: 8px 12px; /* Slightly reduced padding */
+    border: 1px solid #ccc; /* Standard border */
+    border-radius: 4px; /* Standard border-radius */
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #fff; /* Default white background */
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  .formGroup input[type="text"]:focus,
+  .formGroup input[type="number"]:focus,
+  .formGroup input[type="date"]:focus,
+  .formGroup textarea:focus {
+    border-color: #00695c; /* Focus color matching header */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 105, 92, 0.2); /* Subtle focus shadow */
+  }
+  
+  /* Style for disabled fields (matches UI) */
+  .formGroup input[type="text"]:disabled {
+    background-color: #e9ecef; /* Standard Bootstrap disabled color */
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #ced4da;
+  }
+  
+  /* Textarea specific styling */
+  .formGroup textarea {
+    resize: vertical;
+    min-height: 120px; /* Increased min-height for details */
+  }
+  
+  /* --- Styles for Layout within Modal --- */
+  
+  /* HN Input Group */
+  .hnInputGroup {
+    display: flex;
+    align-items: flex-end; /* Align items to the bottom */
+    gap: 10px;
+    margin-bottom: 20px; /* Spacing below HN group */
+  }
+  
+  .hnInputGroup label {
+    margin-bottom: 0; /* Remove bottom margin for label in this group */
+    white-space: nowrap;
+    align-self: center; /* Center label vertically with input */
+    padding-bottom: 8px; /* Add padding to align with input baseline */
+  }
+  
+  .hnInputGroup input[type="text"] {
+    flex-grow: 1; /* Allow input to take remaining space */
+  }
+  
+  /* ตรวจสอบ Button (Matches UI Gray) */
+  .checkButton {
+    background-color: #17a2b8; /* Gray background like UI */
+    color: #333;             /* Dark text */
+    padding: 8px 18px;      /* Match input padding height */
+    border: 1px solid #ccc; /* Match input border */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .checkButton:hover {
+    background-color: #d4d4d4; /* Slightly darker gray on hover */
+    border-color: #bbb;
+  }
+  
+  /* Patient Info Grid */
+  .infoGrid {
+    display: grid;
+    /* Adjust minmax for potentially 3 columns on wider screens */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px 16px; /* Row gap, Column gap */
+    margin-bottom: 20px;
+  }
+  
+  .infoGrid .formGroup {
+    margin-bottom: 0; /* No extra margin within the grid */
+  }
+  
+  /* Grid for Death Date and Time (NEW) */
+  .deathDateTimeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 12px 16px; /* Row gap, Column gap */
+    margin-bottom: 16px; /* Space below this grid */
+  }
+  
+  .deathDateTimeGrid .formGroup {
+    margin-bottom: 0; /* No extra margin within the grid */
+  }
+  
+  /* Date Input Specific (Calendar Icon handled by input type="date") */
+  .dateInput {
+    /* Inherits general input styles, add specific if needed */
+    /* background-image: url('path/to/calendar-icon.svg'); */ /* Optional: custom icon */
+    /* background-repeat: no-repeat; */
+    /* background-position: right 10px center; */
+    /* background-size: 16px; */
+  }
+  
+  
+  /* Time Input Container */
+  .timeInputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .timeInputs input[type="number"] {
+    width: 70px; /* Fixed width for time inputs */
+    text-align: center;
+    padding-left: 5px;  /* Adjust padding for centering if needed */
+    padding-right: 5px;
+  }
+  /* Hide browser default spinners for number input (optional) */
+  .timeInputs input[type=number]::-webkit-inner-spin-button,
+  .timeInputs input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .timeInputs input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+  
+  
+  /* Style for the colon (:) or separator if needed, though React code doesn't add one */
+  /* .timeInputs::after { content: ':'; font-weight: bold; } */
+  
+  
+  /* --- Footer Styles --- */
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end; /* Align button(s) to the right */
+    gap: 12px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+    margin-top: auto; /* Push footer to bottom if body content is short */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+  }
+  
+  /* Base button style in footer */
+  .modalFooter button {
+    padding: 9px 25px; /* Adjusted padding */
+    border: none;
+    border-radius: 4px; /* Match input radius */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  
+  /* Save Button (Matches UI Green) */
+  .saveButton {
+    background-color: #28a745; /* Green */
+    color: white;
+  }
+  
+  .saveButton:hover {
+    background-color: #218838; /* Darker green */
+  }
+  
+  
+  /* Clear Button styling (kept definition in case needed elsewhere, but removed from UI) */
+  .clearButton {
+    background-color: #f8f9fa; /* Light gray */
+    color: #555;
+    border: 1px solid #ddd;
+  }
+  
+  .clearButton:hover {
+    background-color: #e2e6ea;
+    border-color: #ccc;
+  }
+  
+  /* =========================================== */
+  /* ============ MODAL STYLES END ============= */
+  /* =========================================== */
+  
+  /* Optional: Styles for placeholder components if not using native date */
+  /* Example for a custom calendar placeholder (if needed) */
+  /*
+  .calendarPlaceholder {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: left;
+  }
+  */
+  
+  /* Add media queries for responsiveness if needed */
+  /* Example:
+  @media (max-width: 768px) {
+    .modalContent {
+      width: 95%;
+    }
+    .infoGrid, .deathDateTimeGrid {
+      grid-template-columns: 1fr; // Stack elements on smaller screens
+    }
+    .hnInputGroup {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  */

@@ -1,23 +1,17 @@
 "use client";
 
-// เพิ่ม React เข้าไปก่อน (หากยังไม่มี)
 import React, { useState } from 'react';
 import styles from './appointment.module.css';
-import { FaEye, FaTrashAlt, FaTimes, FaSearch } from 'react-icons/fa';
+import { FaEye, FaTrashAlt, FaTimes, FaSearch, FaEdit} from 'react-icons/fa';
 
-// --- Calendar Component Placeholder ---
-// คุณอาจจะต้องติดตั้ง library เพิ่มเติม เช่น react-datepicker
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// หรือสร้าง component ปฏิทินของคุณเอง
 const CalendarPlaceholder = ({ selectedDate, onChange }) => {
-  // นี่คือตัวอย่างง่ายๆ สามารถแทนที่ด้วย component ปฏิทินจริง
+
   return (
     <input
       type="date"
       value={selectedDate ? selectedDate.toISOString().split('T')[0] : ''}
       onChange={(e) => onChange(new Date(e.target.value))}
-      className={styles.dateInput} // เพิ่ม class สำหรับ styling ถ้าต้องการ
+      className={styles.dateInput}
     />
   );
 };
@@ -143,7 +137,19 @@ export default function Treatment() {
             </thead>
             {/* Removed extra whitespace within tbody, tr, and between td elements */}
             <tbody>{treatmentData.map((treatment) => (
-                <tr key={treatment.id}><td>{treatment.hn}</td><td>{treatment.name}</td><td>{treatment.appointmentDate}</td><td>{treatment.appointmentTime}</td><td>{treatment.hospitalName}</td><td>{treatment.department}</td><td className={styles.actions}><button className={styles.viewButton}><FaEye /></button><button className={styles.deleteButton}><FaTrashAlt /></button></td></tr>
+                <tr key={treatment.id}>
+                  <td>{treatment.hn}</td>
+                  <td>{treatment.name}</td>
+                  <td>{treatment.appointmentDate}</td>
+                  <td>{treatment.appointmentTime}</td>
+                  <td>{treatment.hospitalName}</td>
+                  <td>{treatment.department}</td>
+                  <td className={styles.actions}>
+                    <button className={styles.viewButton} title="ดูรายละเอียด"><FaEye /></button>
+                    <button className={styles.editButton} title="แก้ไขข้อมูล"><FaEdit /></button>
+                    <button className={styles.deleteButton} title="ลบข้อมูล"><FaTrashAlt /></button>
+                  </td>
+                </tr>
             ))}</tbody>
           </table>
         </div>

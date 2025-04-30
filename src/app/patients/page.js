@@ -58,32 +58,40 @@ export default function Patients() {
         {/* Patient Table */}
         <div className={styles.tableWrapper}>
           <table className={styles.table}>
-            {/* ***** START OF CHANGES in Patient Table ***** */}
-            {/* Removed extra whitespace within thead and tr */}
             <thead>
               <tr><th>รหัสประจำตัว</th><th>ชื่อจริง-นามสกุล</th><th>อายุ</th><th>วันที่เข้ารับการรักษา</th><th>โรคประจำตัว</th><th>กิจวัตรประจำวัน</th></tr>
             </thead>
-            {/* Removed extra whitespace within tbody, between Fragments/trs, and within tr/td */}
             <tbody>{[1, 2, 3].map((i, index) => (
-                // Use React.Fragment to group rows without adding an extra DOM element
-                // Ensure no leading/trailing whitespace around the fragment or its children (trs)
                 <React.Fragment key={i}>
-                  <tr><td>HN0000{i}</td><td>นาย ภัทรดนัย เกียรตินิธิกุล</td><td>80 ปี</td><td>20 ตุลาคม 2560</td><td>สมองเสื่อม</td><td className={styles.actions}><button onClick={() => toggleAdlDropdown(index)}>{activePatient === index ? <FaChevronUp /> : <FaChevronDown />}</button><button className={styles.viewButton}><FaEye /></button><button><FaEdit /></button></td></tr>
+                  <tr>
+                    <td>HN0000{i}</td>
+                    <td>นาย ภัทรดนัย เกียรตินิธิกุล</td>
+                    <td>80 ปี</td><td>20 ตุลาคม 2560</td>
+                    <td>สมองเสื่อม</td>
+                    <td className={styles.actions}>
+                      <button onClick={() => toggleAdlDropdown(index)} title="ตารางADL">{activePatient === index ? <FaChevronUp /> : <FaChevronDown />}</button>
+                      <button className={styles.viewButton} title="ดูรายละเอียด"><FaEye /></button>
+                      <button className={styles.editButton} title="แก้ไขข้อมูล"><FaEdit /></button>
+                    </td>
+                  </tr>
                   {activePatient === index && (
                     <tr><td colSpan={6}>
                       {/* ADL Table */}
                       <div className={styles.adlTableWrapper}>
                         <table className={styles.table}>
-                          {/* ***** START OF CHANGES in ADL Table ***** */}
-                          {/* Removed extra whitespace within thead and tr */}
                           <thead>
                             <tr><th>หัวข้อที่</th><th>การประเมินกิจวัตรประจำวัน</th><th colSpan="4">คะแนน</th></tr>
                           </thead>
-                          {/* Removed extra whitespace within tbody, between trs, and within tr/td */}
                           <tbody>{adlItems.map((item) => (
-                              <tr key={item.id}><td>{adlItems.indexOf(item) + 1}</td><td className={styles.descriptionCell}>{item.name}<div className={styles.tooltipWrapper}><span className={styles.tooltipIcon}>ⓘ</span><div className={styles.tooltipText}>{item.tooltip}</div></div></td>{[0, 1, 2, 3].map(score => (<td key={score}><input type="radio" name={`adl-${index}-${item.id}`} value={score} checked={adlScores[item.id] === score} onChange={() => handleScoreChange(item.id, score)} /></td>))}</tr>
+                              <tr key={item.id}>
+                                <td>{adlItems.indexOf(item) + 1}</td>
+                                <td className={styles.descriptionCell}>{item.name}
+                                  <div className={styles.tooltipWrapper}>
+                                    <span className={styles.tooltipIcon}>ⓘ</span>
+                                      <div className={styles.tooltipText}>{item.tooltip}</div>
+                                  </div>
+                                </td>{[0, 1, 2, 3].map(score => (<td key={score}><input type="radio" name={`adl-${index}-${item.id}`} value={score} checked={adlScores[item.id] === score} onChange={() => handleScoreChange(item.id, score)} /></td>))}</tr>
                           ))}</tbody>
-                          {/* ***** END OF CHANGES in ADL Table ***** */}
                         </table>
                         <div className={styles.resultRow}>
                           <span>คะแนนรวม : <strong>{totalScore}</strong></span>
