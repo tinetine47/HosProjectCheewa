@@ -1,0 +1,189 @@
+/* report.module.css */
+
+.mainContainer {
+    /* ลบ: max-width: 1000px; */
+    /* ลบ: margin: 20px auto; */
+    /* ลบ: box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    /* ลบ: border-radius: 8px; */
+    /* ลบ: border: 1px solid #dee2e6; */ /* ถ้าไม่ต้องการเส้นขอบซ้อน */
+  
+    width: 100%;   /* ใช้ความกว้างเต็มที่ */
+    height: 100%;  /* ใช้ความสูงเต็มที่ */
+    background-color: #fff; /* อาจจะยังคงพื้นหลังขาวสำหรับส่วน report เอง */
+    padding: 15px; /* อาจจะลด padding ลงเล็กน้อย หรือเอาออกถ้า contentArea มีแล้ว */
+    box-sizing: border-box;
+    border-radius: 6px; /* อาจจะยังคงขอบมนภายใน */
+  
+    /* ทำให้ส่วนต่างๆ ภายในเรียงแนวตั้ง และจัดการการยืดหด */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .headerBar {
+    display: flex;
+    justify-content: space-between; /* จัดชิดซ้าย-ขวา */
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6; /* เส้นคั่น */
+  }
+  
+  .headerBar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    overflow: hidden; /* ซ่อนส่วนเกินของ icon */
+  }
+  
+  .searchInput {
+    padding: 8px 12px;
+    border: none; /* เอา border ของ input ออก */
+    outline: none; /* เอา outline เวลา focus ออก */
+    font-size: 0.9rem;
+  }
+  
+  .searchIcon {
+    padding: 8px;
+    background-color: #e9ecef; /* สีพื้นหลังไอคอน */
+    cursor: pointer; /* ทำให้รู้ว่ากดได้ */
+    color: #495057;
+  }
+  
+  /* --- Table Styles --- */
+  .reportTableContainer {
+    /* ... (สไตล์เดิมของกรอบตาราง) ... */
+     background-color: #fff; /* อาจจะย้ายพื้นหลังขาวมาที่นี่แทน mainContainer */
+     border-radius: 6px;
+     border: 1px solid #dee2e6;
+     overflow: hidden; /* สำคัญสำหรับ border-radius */
+  
+     flex-grow: 1; /* *** ให้ส่วนนี้ยืดเต็มพื้นที่แนวตั้งที่เหลือ *** */
+     overflow-y: auto; /* *** ทำให้ scroll ได้เฉพาะส่วนนี้ *** */
+  }
+  
+  .tableHeader {
+    /* อาจจะต้องเพิ่ม position: sticky เพื่อให้หัวตารางลอยตามตอน scroll */
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; /* ต้องมีพื้นหลังทึบ */
+    z-index: 1; /* ให้อยู่เหนือเนื้อหาตาราง */
+  }
+
+  .tableHeader,
+  .tableRow {
+    display: flex;
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    border-bottom: 1px solid #e9ecef; /* เส้นคั่นระหว่างแถว */
+  }
+  .tableRow:last-child {
+      border-bottom: none; /* แถวสุดท้ายไม่มีเส้น */
+  }
+  
+  
+  .headerItem,
+  .tableCell {
+    padding: 12px 15px; /* ระยะห่างภายใน cell */
+    text-align: left; /* จัดข้อความชิดซ้าย */
+    color: #495057; /* สีข้อความ */
+  }
+  
+  .headerItem {
+    font-weight: 600; /* ทำให้หัวข้อเป็นตัวหนา */
+    background-color: #f8f9fa; /* สีพื้นหลังหัวข้อ */
+    color: #212529;
+  }
+  
+  /* กำหนดความกว้างของแต่ละคอลัมน์ (ปรับได้) */
+  .colSequence {
+    flex: 0 0 80px; /* ไม่ยืด ไม่หด กว้าง 80px */
+    text-align: center;
+  }
+  
+  .colReportName {
+    flex: 1 1 auto; /* ยืดได้ หดได้ */
+  }
+  
+  .colManage {
+    flex: 0 0 120px; /* กว้าง 120px */
+    text-align: center;
+  }
+  
+  .tableCell.colManage {
+      display: flex;
+      justify-content: center; /* จัดไอคอนกลาง */
+      gap: 10px; /* ระยะห่างระหว่างไอคอน */
+  }
+  
+  .iconButton {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      font-size: 1rem; /* หรือขนาดไอคอน */
+      color: #007bff; /* สีไอคอน (ตัวอย่าง) */
+  }
+  .iconButton:hover {
+      opacity: 0.7;
+  }
+  /* อาจจะกำหนดสีแยกสำหรับแต่ละไอคอน */
+  .iconButton:first-child { /* PDF icon */
+      color: #dc3545; /* สีแดง */
+  }
+  .iconButton:last-child { /* Excel icon */
+      color: #28a745; /* สีเขียว */
+  }
+  
+  
+  .noResults {
+      padding: 20px;
+      text-align: center;
+      color: #6c757d;
+  }
+  
+  
+  /* --- Pagination Styles --- */
+  .paginationContainer {
+    display: flex;
+    justify-content: flex-end; /* จัดปุ่มไปทางขวา */
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6; /* เส้นคั่น */
+    margin-top: 15px; /* ปรับระยะห่าง */
+    flex-shrink: 0; /* ไม่ให้ส่วน pagination หด */
+  }
+  
+  .pageButton {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    color: #007bff;
+    padding: 6px 12px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .pageButton:hover:not(:disabled) {
+    background-color: #e9ecef;
+  }
+  
+  .pageButton:disabled {
+    color: #6c757d;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+  }
+  
+  .pageButton.activePage { /* ปุ่มของหน้าปัจจุบัน */
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
